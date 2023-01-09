@@ -1,0 +1,105 @@
+/* 
+==========================================================
+    ; Title: Assignment 1.2
+    ; Author: Ngi Bujri
+    ; Date: 7 January, 2023
+    ; Description: Landing page for WEB 330 repository
+==========================================================
+*/
+
+body.light-theme {
+  --text-color: #000;
+  --background-color: #fff;
+  --anchor-color: #4f3674;
+  --h1-background-color: #3c275a;
+  --h1-border-color: #d6a800;
+  --heading-background-color: #3c275a;
+  --heading-color: #fff;
+  --heading-border-color: #d6a800;
+  --anchor-hover-color: #4f3675;
+  --anchor-hover-background-color: #d6a800;
+  --card-background-color: #fff;
+  --card-title-color: #4f3674;
+  --btn-background-color: #4f3674;
+  --btn-color: #fff;
+  --btn-hover-background-color: #d6a800;
+  --btn-hover-color: #4f3674;
+  --input-border-color: #ccc;
+}
+
+body.dark-theme {
+  --text-color: #fafafa;
+  --background-color: #303030;
+  --anchor-color: #fff;
+  --h1-background-color: #9c27b0;
+  --h1-border-color: #9c27b0;
+  --heading-background-color: #424242;
+  --heading-color: #fff;
+  --heading-border-color: #424242;
+  --anchor-hover-color: #d176e1;
+  --anchor-hover-background-color: #303030;
+  --card-background-color: #424242;
+  --card-title-color: #d176e1;
+  --btn-background-color: #d176e1;
+  --btn-color: #fff;
+  --btn-hover-background-color: #7d4787;
+  --btn-hover-color: #fff;
+  --input-border-color: #303030;
+}
+
+body {
+  font-family: "Oswald", Verdana, Arial, sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+a {
+  color: var(--anchor-color);
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: var(--anchor-hover-background-color);
+  color: var(--anchor-hover-color);
+}
+
+h1 {
+  color: var(--heading-color);
+  background-color: var(--h1-background-color);
+  padding: 10px;
+  border: solid 1px var(--h1-border-color);
+}
+
+h2,
+h3,
+h4 {
+  color: var(--heading-color);
+  background-color: var(--heading-background-color);
+  padding: 10px;
+  border: solid 1px var(--heading-border-color);
+}
+
+.card {
+  background-color: var(--card-background-color);
+}
+
+.card-title {
+  color: var(--card-title-color);
+}
+
+.btn-primary {
+  background-color: var(--btn-background-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-hover-background-color);
+  color: var(--btn-hover-color);
+}
+
+.input {
+  border-color: var(--input-border-color);
+}
+
+.drop-down-menu {
+  border-color: var(--input-border-color);
+}

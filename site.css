@@ -1,0 +1,74 @@
+/* 
+==========================================================
+    ; Title: Assignment 1.2
+    ; Author: Ngi Bujri
+    ; Date: 7 January, 2023
+    ; Description: Landing page for WEB 330 repository
+==========================================================
+*/
+
+#container {
+  margin: 50px 100px 0 100px;
+}
+
+#icon-mode:hover {
+  cursor: pointer;
+}
+
+#icon-text {
+  padding: 0 0 0 10px;
+}
+
+.pull-right {
+  float: right;
+}
+
+/* center header */
+.app-header {
+  text-align: center;
+  font-weight: 400;
+  border: none;
+  color: inherit;
+  background-color: inherit;
+}
+
+.return-home {
+  color: #4f3674;
+  text-decoration: none;
+}
+
+.return-home:hover {
+  background-color: #d6a800;
+  color: #4f3674;
+}
+
+.return-home:visited {
+  color: #3c275a;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form {
+  display: inline-grid;
+  grid-template-columns: auto;
+}
+
+.form-field {
+  padding: 20px;
+}
+
+.assign-container {
+  padding: 10px;
+}
+
+.assign-content {
+  width: 600px;
+  margin: 3% auto 0;
+}
+
+.assign-results-text {
+  text-align: center;
+  font-size: 28px;
+}
