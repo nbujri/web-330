@@ -87,6 +87,15 @@ h4 {
   color: var(--card-title-color);
 }
 
+.card-content {
+}
+
+.card:hover {
+}
+
+.btn {
+}
+
 .btn-primary {
   background-color: var(--btn-background-color);
 }
