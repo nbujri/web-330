@@ -7,6 +7,7 @@
 ==========================================================
 */
 
+/* colors for light theme */
 body.light-theme {
   --text-color: #000;
   --background-color: #fff;
@@ -27,6 +28,7 @@ body.light-theme {
   --input-border-color: #ccc;
 }
 
+/* colors for dark theme */
 body.dark-theme {
   --text-color: #fafafa;
   --background-color: #303030;
@@ -55,6 +57,7 @@ body {
 
 a {
   color: var(--anchor-color);
+  /* remove underline */
   text-decoration: none;
 }
 
@@ -81,19 +84,28 @@ h4 {
 
 .card {
   background-color: var(--card-background-color);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
 }
 
 .card-title {
+  text-align: center;
   color: var(--card-title-color);
+  font-size: 2em;
+  font-weight: 400;
 }
 
+/* add spacing for content */
 .card-content {
+  padding: 2px 16px;
 }
 
 .card:hover {
 }
 
 .btn {
+  text-align: center;
+  color: var(--btn-color);
 }
 
 .btn-primary {

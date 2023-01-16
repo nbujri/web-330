@@ -12,10 +12,12 @@
 }
 
 #icon-mode:hover {
+  /* show that icon is clickable */
   cursor: pointer;
 }
 
 #icon-text {
+  /* give some spacing */
   padding: 0 0 0 10px;
 }
 
