@@ -298,6 +298,10 @@
             bill.addDessert(new Dessert(checkbox.name, checkbox.value));
           }
         }
+        console.log(bill._beverages);
+        console.log(bill._appetizers);
+        console.log(bill._mainCourses);
+        console.log(bill._desserts);
         // get total
         document.getElementById("order-total").innerHTML = bill.getTotal();
       }
