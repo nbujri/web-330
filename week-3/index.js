@@ -5,9 +5,11 @@
 //     ; Description: app to demonstrate inheritance, forEach(), and checkboxes
 // =============================================================================
 
+"use-strict";
+
 // export all created classes
-export * from "./appetizer";
-export * from "./beverage";
-export * from "./bill";
-export * from "./dessert";
-export * from "./main-course";
+export * from "./appetizer.js";
+export * from "./beverage.js";
+export * from "./bill.js";
+export * from "./dessert.js";
+export * from "./main-course.js";

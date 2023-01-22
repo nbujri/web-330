@@ -5,7 +5,7 @@
 //     ; Description: app to demonstrate inheritance, forEach(), and checkboxes
 // =============================================================================
 
-import { Product } from "./product";
+import { Product } from "./product.js";
 
 export class Dessert extends Product {
   constructor(name, price) {

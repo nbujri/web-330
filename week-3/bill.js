@@ -28,8 +28,8 @@ export class Bill {
   }
 
   // add selected desert to _deserts array
-  addDesert(desert) {
-    this._desserts.push(desert);
+  addDessert(dessert) {
+    this._desserts.push(dessert);
   }
 
   // get total cost of all items selected
