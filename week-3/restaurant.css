@@ -6,3 +6,21 @@
     ; Description: app to demonstrate inheritance, forEach(), and checkboxes
 =============================================================================
 */
+
+.card-container {
+  /* use grid for cards */
+  display: inline-grid;
+  /* create two equal columns */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+#beverages,
+#appetizers,
+#main-courses,
+#desserts {
+  /* display items in a column */
+  display: flex;
+  flex-direction: column;
+}
