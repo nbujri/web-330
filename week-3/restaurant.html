@@ -52,7 +52,7 @@
         <!-- menu -->
         <div class="card">
           <div class="card-title">Restaurant Menu</div>
-          <div class="card-content">
+          <div class="card-content card-container">
             <div class="card">
               <!-- beverages card -->
               <div class="card-title">Beverages</div>
@@ -298,12 +298,10 @@
             bill.addDessert(new Dessert(checkbox.name, checkbox.value));
           }
         }
-        console.log(bill._beverages);
-        console.log(bill._appetizers);
-        console.log(bill._mainCourses);
-        console.log(bill._desserts);
-        // get total
-        document.getElementById("order-total").innerHTML = bill.getTotal();
+        // get total and display in order summary
+        document.getElementById(
+          "order-total"
+        ).innerHTML = `your order total is ${bill.getTotal().toFixed(2)}`;
       }
     </script>
   </body>

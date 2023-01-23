@@ -53,5 +53,7 @@ export class Bill {
     let dessertTotal = this._desserts.forEach(function (dessert) {
       total += parseFloat(dessert.price);
     });
+
+    return total;
   }
 }
