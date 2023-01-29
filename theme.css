@@ -26,6 +26,12 @@ body.light-theme {
   --btn-hover-background-color: #d6a800;
   --btn-hover-color: #4f3674;
   --input-border-color: #ccc;
+  /* table colors */
+  --table-header-background-color: #4f3674;
+  --table-header-color: #fff;
+  --table-border-color: #ddd;
+  --table-hover-background-color: #d6a800;
+  --table-hover-color: #4f3674;
 }
 
 /* colors for dark theme */
@@ -47,6 +53,12 @@ body.dark-theme {
   --btn-hover-background-color: #7d4787;
   --btn-hover-color: #fff;
   --input-border-color: #303030;
+  /* table colors */
+  --table-header-background-color: #d176e1;
+  --table-header-color: #fff;
+  --table-border-color: #303030;
+  --table-hover-background-color: #7d4787;
+  --table-hover-color: #fff;
 }
 
 body {
@@ -123,4 +135,28 @@ h4 {
 
 .drop-down-menu {
   border-color: var(--input-border-color);
+}
+
+/* table styles */
+.table {
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.table th {
+  text-align: left;
+  background-color: var(--table-header-background-color);
+  color: var(--table-header-color);
+}
+
+.table td,
+th {
+  padding: 12px;
+  border: 1px solid var(--table-border-color);
+}
+
+.table-hover:hover {
+  background-color: var(--table-hover-background-color);
+  color: var(--table-hover-color);
+  cursor: pointer;
 }

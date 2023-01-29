@@ -6,3 +6,11 @@
     ; Description: calorie app demonstrating static properties, built-in functions and lambda expressions
 ==========================================================
 */
+
+#foodList {
+  /* place in right side of div */
+  float: right;
+  color: #df546a;
+  font-size: 12px;
+  letter-spacing: 2px;
+}

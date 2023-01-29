@@ -13,7 +13,157 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./bujri-calorie.css" />
+    <link rel="stylesheet" href="../site.css" />
+    <link rel="stylesheet" href="../theme.css" />
+
+    <!-- JS -->
+    <script src="../theme.js"></script>
+
+    <title>WEB 330 - Enterprise JavaScript II</title>
   </head>
-  <body></body>
+  <body class="light-theme">
+    <div id="container">
+      <!-- theme toggle -->
+      <i
+        onclick="toggleMode(this)"
+        id="icon-mode"
+        class="fa fa-toggle-off pull-right"
+        style="font-size: 28px"
+        ><span id="icon-text"></span
+      ></i>
+
+      <div class="assign-container">
+        <h1 class="app-header">Welcome to the Calorie App!</h1>
+
+        <!-- search form -->
+        <div class="assign-content">
+          <div class="card">
+            <div class="card-title">Calorie Search Form</div>
+            <div class="card-content">
+              <div class="form">
+                <div class="form-field">
+                  <label for="txtFoodItem">Enter a food item:</label>
+                  <input type="text" id="txtFoodItem" />
+                  <div><span id="foodList"></span></div>
+                </div>
+                <div class="form-field">
+                  <button class="btn btn-primary full-width" id="btnSearch">
+                    Search
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- return to landing page -->
+          <a href="../index.html" class="return-home">Return</a>
+        </div>
+
+        <!-- search results -->
+        <div class="assign-container">
+          <div class="assign-content">
+            <div class="card">
+              <div class="card-title">Search Results</div>
+              <div
+                class="card-content assign-results-text"
+                id="searchResults"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // if no theme in local storage, set to light
+      setDefaultTheme();
+
+      // toggle between light and dark themes
+      function toggleMode(x) {
+        let colorTheme = document.body.classList;
+        let iconMode = x.classList;
+
+        if (colorTheme.value === "light-theme") {
+          localStorage.clear();
+          localStorage.setItem("mode", "dark-theme");
+          localStorage.setItem("iconMode", "fa-toggle-on");
+          localStorage.setItem("iconText", "Dark Mode");
+        } else {
+          localStorage.clear();
+          localStorage.setItem("mode", "light-theme");
+          localStorage.setItem("iconMode", "fa-toggle-off");
+          localStorage.setItem("iconText", "Light Mode");
+        }
+
+        colorTheme.value = localStorage.getItem("mode");
+        iconMode.value = `fa ${localStorage.getItem("iconMode")} pull-right`;
+        document.getElementById("icon-text").innerHTML =
+          localStorage.getItem("iconText");
+      }
+    </script>
+
+    <script type="module">
+      // imports
+      import { CalorieConverter } from "./calorie-converter.js";
+
+      const txtFoodItemEl = document.getElementById("txtFoodItem");
+      const searchButton = document.getElementById("btnSearch");
+      const searchResults = document.getElementById("searchResults");
+      const foodListEl = document.getElementById("foodList");
+
+      searchButton.addEventListener("click", search);
+      // call search() when enter is pressed
+      // listen for keyup when input field is focused
+      txtFoodItemEl.addEventListener("keyup", (e) => {
+        if (e.code == "Enter" || e.code == "NumpadEnter") {
+          search();
+        }
+      });
+
+      // function to search for item
+      function search() {
+        // store input in lower case
+        const txtFoodItem = txtFoodItemEl.value.toLowerCase();
+        // use find method from CalorieConverter to search input
+        const foods = CalorieConverter.find(txtFoodItem);
+        // use string to build HTML table
+        let tableData = `<table class="table"><tr><th>Name</th><th>Calories</th></tr>`;
+        // loop through foods and add items to table
+        for (let food of foods) {
+          tableData += `<tr class="table-hover"><td>${food.name}</td><td>${food.calories}</td></tr>`;
+        }
+        // close table
+        tableData += `</table>`;
+        // set searchResults to tableData
+        searchResults.innerHTML = tableData;
+      }
+
+      // get data array from CalorieConverter
+      const foodList = CalorieConverter.data;
+      // build HTML for foodListEL
+      let foodListData = `<i>(Ex: `;
+      for (let food of foodList) {
+        foodListData += `${food.name}, `;
+      }
+      // remove trailing comma
+      foodListData = foodListData.replace(/, \s*$/, "");
+      // close <i>
+      foodListData += `)</i>`;
+      foodListEl.innerHTML = foodListData;
+    </script>
+  </body>
 </html>
