@@ -1,0 +1,19 @@
+/*
+==========================================================
+    ; Title: Assignment 5.2
+    ; Author: Ngi Bujri
+    ; Date: 31 January, 2023
+    ; Description: app demonstrating JS iterators
+==========================================================
+*/
+
+#cart-message {
+  float: right;
+  color: #df546a;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+i:hover {
+  cursor: pointer;
+}

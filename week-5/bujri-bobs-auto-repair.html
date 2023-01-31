@@ -1,0 +1,198 @@
+<!--
+==========================================================
+    ; Title: Assignment 5.2
+    ; Author: Ngi Bujri
+    ; Date: 31 January, 2023
+    ; Description: app demonstrating JS iterators
+==========================================================
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../theme.css" />
+    <link rel="stylesheet" href="../site.css" />
+    <link rel="stylesheet" href="./bujri-bobs-auto-repair.css" />
+
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- JS -->
+    <script src="../theme.js"></script>
+    <script src="./cart-component.js"></script>
+
+    <title>WEB 330 - Enterprise JavaScript II</title>
+  </head>
+  <body class="light-theme">
+    <div id="container">
+      <!-- theme toggle -->
+      <i
+        onclick="toggleMode(this)"
+        id="icon-mode"
+        class="fa fa-toggle-off pull-right"
+        style="font-size: 28px"
+      >
+        <span id="icon-text"></span>
+      </i>
+
+      <!-- selection form -->
+      <div class="assign-container">
+        <h1 class="app-header">Welcome to Bob's Automotive Repair Shop!</h1>
+        <div class="assign-content">
+          <div class="card">
+            <div class="card-title">Product Listing</div>
+            <cart-component></cart-component>
+            <div class="card-content">
+              <div class="form">
+                <div class="form-field">
+                  <label for="productList">Choose a product:</label>
+                  <select
+                    name="productList"
+                    id="productList"
+                    class="drop-down-menu"
+                  >
+                    <option value="Select">--Select--</option>
+                    <option value="19.99">Oil Change</option>
+                    <option value="18.44">Filter Replacement</option>
+                    <option value="9.99">Wiper Fluid Refill</option>
+                  </select>
+                </div>
+                <i id="cart-message"
+                  >To view your shopping cart, click on the cart icon</i
+                >
+                <div class="form-field">
+                  <button id="btnAddProduct" class="btn btn-primary full-width">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- return to landing page -->
+          <a href="../index.html" class="return-home">Return</a>
+        </div>
+      </div>
+
+      <!-- results form -->
+      <div class="assign-container">
+        <div class="assign-content">
+          <div class="card">
+            <div class="card-title">Shopping Cart</div>
+            <div class="card-content" id="shoppingCart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // if no theme in local storage, set to light
+      setDefaultTheme();
+
+      // toggle between light and dark themes
+      function toggleMode(x) {
+        let colorTheme = document.body.classList;
+        let iconMode = x.classList;
+
+        if (colorTheme.value === "light-theme") {
+          localStorage.clear();
+          localStorage.setItem("mode", "dark-theme");
+          localStorage.setItem("iconMode", "fa-toggle-on");
+          localStorage.setItem("iconText", "Dark Mode");
+        } else {
+          localStorage.clear();
+          localStorage.setItem("mode", "light-theme");
+          localStorage.setItem("iconMode", "fa-toggle-off");
+          localStorage.setItem("iconText", "Light Mode");
+        }
+
+        colorTheme.value = localStorage.getItem("mode");
+        iconMode.value = `fa ${localStorage.getItem("iconMode")} pull-right`;
+        document.getElementById("icon-text").innerHTML =
+          localStorage.getItem("iconText");
+      }
+    </script>
+
+    <script type="module">
+      // imports
+      import { Product } from "./product.js";
+      import { ShoppingCart } from "./shopping-cart.js";
+
+      // create instance of ShoppingCart
+      const shoppingCart = new ShoppingCart();
+
+      // HTML elements
+      const btnAddProduct = document.getElementById("btnAddProduct");
+      const carton = document.getElementById("carton");
+      const shoppingCartTable = document.getElementById("shoppingCart");
+
+      // event listeners
+      // add product to cart
+      btnAddProduct.addEventListener("click", () => {
+        const productList = document.getElementById("productList");
+
+        // get text of selected item
+        const product = productList.options[productList.selectedIndex].text;
+        // get value of selected item
+        const productValue =
+          productList.options[productList.selectedIndex].value;
+
+        // add new Product if --Select-- not chosen
+        if (product !== "--Select--") {
+          shoppingCart.add(new Product(product, productValue));
+          // update cart count
+          setCartCount();
+          // alert that item was added to cart
+          alert(`${product} was added to your shopping cart!`);
+          // reset selection
+          productList.value = "Select";
+        }
+      });
+
+      // display items when cart is clicked
+      carton.addEventListener("click", () => {
+        let cartDisplayTable = `<table class="table">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+          </tr>`;
+
+        for (let item of shoppingCart.generator()) {
+          cartDisplayTable += `
+          <tr class="table-hover">
+            <td>${item.id}</td>
+            <td>${item.name}</td>
+            <td>${item.price}</td>
+            </tr>
+          `;
+        }
+
+        // close table
+        cartDisplayTable += `</table>`;
+        shoppingCartTable.innerHTML = cartDisplayTable;
+      });
+
+      // functions
+      function setCartCount() {
+        const cartCountEL = document.getElementById("cart-count");
+        cartCountEL.innerHTML = shoppingCart.count();
+      }
+
+      setCartCount();
+    </script>
+  </body>
+</html>
