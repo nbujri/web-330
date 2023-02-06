@@ -17,3 +17,10 @@
 i:hover {
   cursor: pointer;
 }
+
+cart-component {
+  /* center element in the center of card */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -171,6 +171,7 @@
             <th>Price</th>
           </tr>`;
 
+        // add item info to table
         for (let item of shoppingCart.generator()) {
           cartDisplayTable += `
           <tr class="table-hover">
@@ -188,6 +189,7 @@
 
       // functions
       function setCartCount() {
+        // update number of cart items
         const cartCountEL = document.getElementById("cart-count");
         cartCountEL.innerHTML = shoppingCart.count();
       }
