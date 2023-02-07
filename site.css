@@ -34,18 +34,9 @@
   background-color: inherit;
 }
 
-.return-home {
-  color: #4f3674;
-  text-decoration: none;
-}
-
 .return-home:hover {
   background-color: #d6a800;
   color: #4f3674;
-}
-
-.return-home:visited {
-  color: #3c275a;
 }
 
 .full-width {
