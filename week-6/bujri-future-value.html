@@ -1,0 +1,207 @@
+<!--
+  Title: bujri-future-value.html
+  Author: ngi bujri
+  Date: 7 february 2023
+  Description: app demonstrating data validation and complex class types
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../theme.css" />
+    <link rel="stylesheet" href="../site.css" />
+    <link rel="stylesheet" href="./bujri-future-value.css" />
+    <link rel="stylesheet" href="../flex-layout.css" />
+
+    <!-- JS -->
+    <script src="../theme.js"></script>
+
+    <title>WEB 330 - Enterprise JavaScript II</title>
+  </head>
+  <body class="light-theme">
+    <div id="container">
+      <!-- theme toggle -->
+      <i
+        onclick="toggleMode(this)"
+        id="icon-mode"
+        class="fa fa-toggle-off pull-right"
+        style="font-size: 28px"
+      >
+        <span id="icon-text"></span>
+      </i>
+    </div>
+
+    <!-- input card -->
+    <div class="assign-container">
+      <h1 class="app-header">Welcome to the Future Value App!</h1>
+      <div class="assign-content">
+        <div class="card">
+          <div class="card-title">Future Value Calculator</div>
+          <div id="errorLog" class="danger"></div>
+          <div class="card-content">
+            <div class="form">
+              <div class="form-field">
+                <label for="txtMonthlyPayment" class="form-label col-5"
+                  >Monthly Payment:</label
+                >
+                <input type="text" id="txtMonthlyPayment" class="col-7" />
+                <label for="" class="form-label col-5">Interest Rate:</label>
+                <input type="text" id="txtYearlyRate" class="col-7" />
+                <i class="danger">Enter 11% as 11.1</i>
+                <label for="" class="form-label col-5">Number of Years:</label>
+                <select
+                  name="listNumOfYears"
+                  id="listNumOfYears"
+                  class="drop-down-menu col-7"
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <button class="btn btn-primary full-width" id="btnCalculate">
+                  Calculate
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- return to landing page -->
+        <a href="../index.html" class="return-home">Return</a>
+      </div>
+    </div>
+
+    <!-- results card -->
+    <div class="assign-container">
+      <div class="assign-content">
+        <div class="card">
+          <div class="card-title">
+            Calculation as of <span id="today"></span>
+          </div>
+          <div class="card-content" id="futureValue"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- script for theme toggle -->
+    <script>
+      // if no theme in local storage, set to light
+      setDefaultTheme();
+
+      // toggle between light and dark themes
+      function toggleMode(x) {
+        let colorTheme = document.body.classList;
+        let iconMode = x.classList;
+
+        if (colorTheme.value === "light-theme") {
+          localStorage.clear();
+          localStorage.setItem("mode", "dark-theme");
+          localStorage.setItem("iconMode", "fa-toggle-on");
+          localStorage.setItem("iconText", "Dark Mode");
+        } else {
+          localStorage.clear();
+          localStorage.setItem("mode", "light-theme");
+          localStorage.setItem("iconMode", "fa-toggle-off");
+          localStorage.setItem("iconText", "Light Mode");
+        }
+
+        colorTheme.value = localStorage.getItem("mode");
+        iconMode.value = `fa ${localStorage.getItem("iconMode")} pull-right`;
+        document.getElementById("icon-text").innerHTML =
+          localStorage.getItem("iconText");
+      }
+    </script>
+
+    <script type="module">
+      // import statements
+      import { FinanceCalculator } from "./finance-calculator.js";
+      import { Validator } from "./validator.js";
+
+      // DOM elements
+      const dateSpan = document.getElementById("today");
+      const btnCalculate = document.getElementById("btnCalculate");
+      const txtMonthlyPayment = document.getElementById("txtMonthlyPayment");
+      const txtYearlyRate = document.getElementById("txtYearlyRate");
+      const listNumOfYears = document.getElementById("listNumOfYears");
+      const errorLogDiv = document.getElementById("errorLog");
+      const futureValueDiv = document.getElementById("futureValue");
+
+      // set text of dateSpan to current date
+      dateSpan.innerHTML = new Date().toLocaleDateString("en-US");
+
+      // event listeners
+      btnCalculate.addEventListener("click", () => {
+        // get input field values
+        const monthlyPayment = txtMonthlyPayment.value;
+        const rate = txtYearlyRate.value;
+        const years = listNumOfYears.value;
+
+        const errorLogEl = errorLogDiv;
+
+        const monthlyPaymentValidator = new Validator(
+          "Monthly Payment",
+          monthlyPayment
+        );
+        monthlyPaymentValidator.addRequiredField();
+        monthlyPaymentValidator.addRequiredFloatField();
+        monthlyPaymentValidator.addFloatMinField(100);
+
+        const rateValidator = new Validator("Interest Rate", rate);
+        rateValidator.addRequiredField();
+        rateValidator.addRequiredFloatField();
+        rateValidator.addFloatMaxField(100);
+
+        let errorLog = [];
+        if (!monthlyPaymentValidator.validate()) {
+          for (let message of monthlyPaymentValidator.messages) {
+            errorLog.push(message);
+          }
+        }
+
+        if (!rateValidator.validate()) {
+          for (let message of rateValidator.messages) {
+            errorLog.push(message);
+          }
+        }
+
+        if (monthlyPaymentValidator.validate() & rateValidator.validate()) {
+          errorLogEl.innerHTML = "";
+          const futureValue = FinanceCalculator.calculateFutureValue(
+            monthlyPayment,
+            rate,
+            years
+          );
+          futureValueDiv.innerHTML = futureValue;
+        } else {
+          errorLogEl.innerHTML = "";
+          let errorLogMessage = "";
+        }
+      });
+    </script>
+  </body>
+</html>

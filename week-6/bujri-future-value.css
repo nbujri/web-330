@@ -1,0 +1,11 @@
+/*
+  Title: bujri-future-value.css
+  Author: ngi bujri
+  Date: 7 february 2023
+  Description: app demonstrating data validation and complex class types
+*/
+
+.form-label {
+  display: inline-block;
+  padding-top: 1rem;
+}
