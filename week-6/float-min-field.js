@@ -10,13 +10,17 @@ export class FloatMinField {
     this.min = min;
   }
 
-  // check if the value is greater than the min value
   validate() {
-    return parseFloat(this.field) > this.min;
+    // if value is greater than min return true, else return false
+    if (parseFloat(this.field) > this.min) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  // return message if value is less than min
   getMessage() {
+    // error message for value entered that is less than min
     return `${this.name} must be more than ${this.min}. You entered ${this.field}`;
   }
 }

@@ -54,7 +54,9 @@
       <div class="assign-content">
         <div class="card">
           <div class="card-title">Future Value Calculator</div>
-          <div id="errorLog" class="danger"></div>
+          <div class="row">
+            <div id="errorLog" class="danger col-12"></div>
+          </div>
           <div class="card-content">
             <div class="form">
               <div class="form-field">
@@ -142,66 +144,92 @@
       import { FinanceCalculator } from "./finance-calculator.js";
       import { Validator } from "./validator.js";
 
-      // DOM elements
-      const dateSpan = document.getElementById("today");
-      const btnCalculate = document.getElementById("btnCalculate");
-      const txtMonthlyPayment = document.getElementById("txtMonthlyPayment");
-      const txtYearlyRate = document.getElementById("txtYearlyRate");
-      const listNumOfYears = document.getElementById("listNumOfYears");
-      const errorLogDiv = document.getElementById("errorLog");
-      const futureValueDiv = document.getElementById("futureValue");
+      // set today span to current date
+      document.getElementById("today").innerHTML =
+        new Date().toLocaleDateString("en-US");
 
-      // set text of dateSpan to current date
-      dateSpan.innerHTML = new Date().toLocaleDateString("en-US");
+      // register onclick event for btnCalculate
+      document.getElementById("btnCalculate").onclick = function () {
+        // get monthly payment value
+        const monthlyPayment =
+          document.getElementById("txtMonthlyPayment").value;
+        // get interest rate value
+        const rate = document.getElementById("txtYearlyRate").value;
+        // get number of years
+        const years = document.getElementById("listNumOfYears").value;
+        // get errorLog element
+        const errorLogEl = document.getElementById("errorLog");
 
-      // event listeners
-      btnCalculate.addEventListener("click", () => {
-        // get input field values
-        const monthlyPayment = txtMonthlyPayment.value;
-        const rate = txtYearlyRate.value;
-        const years = listNumOfYears.value;
-
-        const errorLogEl = errorLogDiv;
-
+        // create new object of Validator for monthly payment field
         const monthlyPaymentValidator = new Validator(
           "Monthly Payment",
           monthlyPayment
         );
+        // add validators to the monthly payment field
         monthlyPaymentValidator.addRequiredField();
         monthlyPaymentValidator.addRequiredFloatField();
         monthlyPaymentValidator.addFloatMinField(100);
 
+        // create new object of Validator for interest rate field
         const rateValidator = new Validator("Interest Rate", rate);
+        // add validators for interest rate field
         rateValidator.addRequiredField();
         rateValidator.addRequiredFloatField();
         rateValidator.addFloatMaxField(100);
 
-        let errorLog = [];
+        // create empty array to store error messages
+        const errorLog = [];
+
+        // call validate function on monthlyPaymentValidator
         if (!monthlyPaymentValidator.validate()) {
+          // if false, push error message to errorLog
           for (let message of monthlyPaymentValidator.messages) {
             errorLog.push(message);
           }
         }
-
+        // call validate function on rateValidator
         if (!rateValidator.validate()) {
+          // if false, push error message to errorLog
           for (let message of rateValidator.messages) {
             errorLog.push(message);
           }
         }
 
-        if (monthlyPaymentValidator.validate() & rateValidator.validate()) {
+        // console.table(errorLog);
+
+        // check if both input values pass validators
+        if (monthlyPaymentValidator.validate() && rateValidator.validate()) {
+          // if true
+          // clear any current error messages
           errorLogEl.innerHTML = "";
+          // call calculateFutureValue
           const futureValue = FinanceCalculator.calculateFutureValue(
             monthlyPayment,
             rate,
             years
           );
-          futureValueDiv.innerHTML = futureValue;
+          // display futureValue
+          document.getElementById(
+            "futureValue"
+          ).innerHTML = `The future value is ${FinanceCalculator.convertToCurrency(
+            futureValue
+          )}`;
         } else {
+          // if false
+          // clear any current error messages
           errorLogEl.innerHTML = "";
-          let errorLogMessage = "";
+          // build an unordered list for new error messages
+          let errorLogMessage = `<ul>`;
+          // iterate over error log and build a new list item for each message
+          for (let message of errorLog) {
+            errorLogMessage += `<li>${message}</li>`;
+          }
+          // close unordered list
+          errorLogMessage += `</ul>`;
+          // display the error messages
+          document.getElementById("errorLog").innerHTML = errorLogMessage;
         }
-      });
+      };
     </script>
   </body>
 </html>

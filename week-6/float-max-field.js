@@ -10,13 +10,17 @@ export class FloatMaxField {
     this.max = max;
   }
 
-  // check if the value is less than the max value
   validate() {
-    return parseFloat(this.field) < this.max;
+    // return true is value less than max, else return false
+    if (parseFloat(this.field) < this.max) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  // return message if value is greater than max
   getMessage() {
+    // error message for value that is greater than max
     return `${this.name} must be less than ${this.max}. You entered ${this.field}`;
   }
 }

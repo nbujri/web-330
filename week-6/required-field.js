@@ -9,13 +9,17 @@ export class RequiredField {
     this.field = field;
   }
 
-  // function checking if field is a string or not
   validate() {
-    return typeof this.field === "string";
+    // return true if field is not empty, else false
+    if (this.field !== "") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  // return message if field is empty
   getMessage() {
+    // return error message for empty field
     return `${this.name} is a required field.`;
   }
 }

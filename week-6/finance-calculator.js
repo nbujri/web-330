@@ -6,19 +6,22 @@
 export class FinanceCalculator {
   static MONTHS_IN_YEAR = 12;
 
-  // function to calculate future value given monthly payment, interest, and number of years
   static calculateFutureValue(monthlyPayment, rate, years) {
-    // calculate number of months
+    // get number of months given years
     const months = years * this.MONTHS_IN_YEAR;
+    // calculate interest rate
     const interestRate = 1 + rate / 100;
+    // calculate current worth
     const presentValue = monthlyPayment * months;
+    // calculate future value
     const futureValue = presentValue * Math.pow(interestRate, months);
 
     return futureValue.toFixed(2);
   }
 
   static convertToCurrency(field) {
-    const currencyFormatter = new Intl.NumberFormat("en-US", {
+    // create formatter for USD
+    let currencyFormatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     });

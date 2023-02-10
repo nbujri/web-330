@@ -9,13 +9,17 @@ export class FloatField {
     this.field = field;
   }
 
-  // check if value is a number
   validate() {
-    return !isNaN(this.field);
+    // if not NaN return true, else return false
+    if (!Number.isNaN(parseFloat(this.field))) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  // return message if value if not a number
   getMessage() {
-    return `${this.name}} must be a float value. You entered ${this.field}`;
+    // return message for value that is not a float
+    return `${this.name} must be a float value. You entered ${this.field}`;
   }
 }
