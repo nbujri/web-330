@@ -63,33 +63,41 @@
             <div class="card-content">
               <div class="form">
                 <div class="form-field">
-                  <label for="txtMonthlyPayment" class="form-label col-5"
-                    >Monthly Payment:</label
-                  >
-                  <input type="text" id="txtMonthlyPayment" class="col-7" />
-                  <label for="" class="form-label col-5">Interest Rate:</label>
-                  <input type="text" id="txtYearlyRate" class="col-7" />
-                  <i class="danger">Enter 11% as 11.1</i>
-                  <label for="" class="form-label col-5"
-                    >Number of Years:</label
-                  >
-                  <!-- choose number of years 1-10 -->
-                  <select
-                    name="listNumOfYears"
-                    id="listNumOfYears"
-                    class="drop-down-menu col-7"
-                  >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                  </select>
+                  <div class="row">
+                    <label for="txtMonthlyPayment" class="form-label col-5"
+                      >Monthly Payment:</label
+                    >
+                    <input type="text" id="txtMonthlyPayment" class="col-7" />
+                  </div>
+                  <div class="row">
+                    <label for="txtYearlyRate" class="form-label col-5"
+                      >Interest Rate:</label
+                    >
+                    <input type="text" id="txtYearlyRate" class="col-7" />
+                    <i class="danger">Enter 11% as 11.1</i>
+                  </div>
+                  <div class="row">
+                    <label for="listNumOfYears" class="form-label col-5"
+                      >Number of Years:</label
+                    >
+                    <!-- choose number of years 1-10 -->
+                    <select
+                      name="listNumOfYears"
+                      id="listNumOfYears"
+                      class="drop-down-menu col-7"
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="form-field">
                   <button class="btn btn-primary full-width" id="btnCalculate">

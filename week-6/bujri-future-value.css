@@ -16,3 +16,8 @@
   display: inline-block;
   padding-top: 1rem;
 }
+
+/* center text */
+#futureValue {
+  text-align: center;
+}
