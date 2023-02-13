@@ -16,11 +16,12 @@ export class FinanceCalculator {
     // calculate future value
     const futureValue = presentValue * Math.pow(interestRate, months);
 
+    // return value to 2 decimal places
     return futureValue.toFixed(2);
   }
 
   static convertToCurrency(field) {
-    // create formatter for USD
+    // format to USD currency
     let currencyFormatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
