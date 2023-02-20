@@ -4,3 +4,8 @@
   date: february 16 2023
   description: app demonstrating use of XML
 */
+
+/* left align text in #selectedBook */
+#selectedBook {
+  text-align: justify;
+}
